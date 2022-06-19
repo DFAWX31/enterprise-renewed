@@ -1,11 +1,11 @@
 {
-  "name": "error-shows",
+  "name": "enterprise-renewed",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "nodemon index.ts"
+    "build": "nodemon index.ts",
+    "register": "ts-node deploy-commands.ts"
   },
   "keywords": [],
   "author": "DFAWX31",

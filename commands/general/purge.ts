@@ -5,7 +5,8 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('purge')
 		.setDescription('Delete upto 99 messages')
-		.addIntegerOption(option => option.setName('amount').setDescription('Number of messages you want to delete 🚮')),
+		.addIntegerOption(option => option.setName('amount').setDescription('Number of messages you want to delete 🚮').setRequired(true))
+		.setDefaultMemberPermissions(8192),
 	async execute(interaction: CommandInteraction) {
 		const amount = interaction.options.getInteger('amount')!;
 

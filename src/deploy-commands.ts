@@ -13,6 +13,8 @@ const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = getFiles(commandsPath, '.ts')
 
 commandFiles.forEach(file => {
+	if (file.endsWith('db.ts')) return
+
 	const command = require(file)
 
 	commands.push(command.data.toJSON())

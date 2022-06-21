@@ -10,20 +10,20 @@ module.exports = {
 		.setDescription('Join the economy game'),
 	async execute(interaction: CommandInteraction) {
 		if (interaction.user.bot) return
-		
-		
+
+
 		const getEntry = await AppDataSource
 			.getRepository(Players)
 			.createQueryBuilder("players")
-			.where("players.id = :id", { id: interaction.user.id})
+			.where("players.id = :id", { id: interaction.user.id })
 			.getOne()
-	
+
 		if (!getEntry) {
 			const user = new Players()
 			user.id = interaction.user.id.toString()
 			user.balance = 0
 			AppDataSource.manager.save(user)
-			interaction.reply({
+			await interaction.reply({
 				content: `${interaction.user} joined the game with 0 balance`,
 				ephemeral: true
 			})
@@ -31,7 +31,7 @@ module.exports = {
 			freebie.user = user
 			AppDataSource.manager.save(freebie)
 		} else {
-			interaction.reply({
+			await interaction.reply({
 				content: "You have already joined the game",
 				ephemeral: true
 			})

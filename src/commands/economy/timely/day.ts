@@ -18,7 +18,7 @@ module.exports = {
 			.getOne()
 
 		if (!getEntry) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: "please use join before claiming this",
 				ephemeral: true
 			})
@@ -27,7 +27,7 @@ module.exports = {
 		const date = ((Date.now() - (Date.now() % 1000)) / 1000).toString()
 
 		if (parseInt(getEntry.daily) + 86400 >= parseInt(date)) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: "You can't do that yet as it's not been a day yet",
 				ephemeral: true
 			})
@@ -69,6 +69,6 @@ module.exports = {
 			console.error(error);
 		}
 
-		interaction.reply("You have earned 100 coins")
+		await interaction.reply("You have earned 100 coins")
 	}
 }

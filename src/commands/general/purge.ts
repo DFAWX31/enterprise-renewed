@@ -11,7 +11,7 @@ module.exports = {
 		const amount = interaction.options.getInteger('amount')!;
 
 		if (amount < 1 || amount > 99) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: `You cannot delete ${amount}`,
 				ephemeral: true
 			})
@@ -21,16 +21,16 @@ module.exports = {
 
 		if (interaction.user.bot) return;
 
-		await interaction.channel?.bulkDelete(amount, true).catch(error => {
+		await interaction.channel?.bulkDelete(amount, true).catch(async error => {
 			console.error(error)
-			interaction.reply({
-				content: `There was an error trying to delete ${ amount } messages`,
+			await interaction.reply({
+				content: `There was an error trying to delete ${amount} messages`,
 				ephemeral: true
 			})
 		})
 
-		return interaction.reply({
-			content: `Succesfully deleted ${ amount } messages`,
+		return await interaction.reply({
+			content: `Succesfully deleted ${amount} messages`,
 			ephemeral: true
 		})
 	}

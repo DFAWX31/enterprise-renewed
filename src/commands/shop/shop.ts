@@ -135,7 +135,11 @@ module.exports = {
 		})
 
 		collector?.on('end', async () => {
-			interaction.editReply('shop timed out')
+			interaction.editReply({
+				content: "Shop session has timed out",
+				components: [],
+				embeds: []
+			})
 		})
 	}
 }

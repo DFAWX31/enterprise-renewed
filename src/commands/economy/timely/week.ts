@@ -11,24 +11,24 @@ module.exports = {
 	async execute(interaction: CommandInteraction) {
 		if (interaction.user.bot) return
 
-		
+
 		const getEntry = await AppDataSource
 			.getRepository(Freebies)
 			.createQueryBuilder('freebies')
-			.where("freebies.user = :id", {id: interaction.user.id})
+			.where("freebies.user = :id", { id: interaction.user.id })
 			.getOne()
-		
+
 		if (!getEntry) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: "please use join before claiming this",
 				ephemeral: true
 			})
 		}
 
-		const date = ((Date.now() - (Date.now() % 1000) ) / 1000).toString()
+		const date = ((Date.now() - (Date.now() % 1000)) / 1000).toString()
 
-		if ( parseInt(getEntry.weekly) + 604800 >= parseInt(date)) {
-			return interaction.reply({
+		if (parseInt(getEntry.weekly) + 604800 >= parseInt(date)) {
+			return await interaction.reply({
 				content: "You can't do that yet as it's not been a week yet",
 				ephemeral: true
 			})
@@ -37,7 +37,7 @@ module.exports = {
 		const getUser = await AppDataSource
 			.getRepository(Players)
 			.createQueryBuilder('user')
-			.where("user.id = :id", {id: interaction.user.id})
+			.where("user.id = :id", { id: interaction.user.id })
 			.getOne()
 
 		if (!getUser) return
@@ -64,12 +64,12 @@ module.exports = {
 				.set({
 					weekly: date
 				})
-				.where("user = :user", {user: interaction.user.id})
+				.where("user = :user", { user: interaction.user.id })
 				.execute()
 		} catch (error) {
 			console.error(error);
 		}
 
-		interaction.reply("You have earned 500 coins")
+		await interaction.reply("You have earned 500 coins")
 	}
 }

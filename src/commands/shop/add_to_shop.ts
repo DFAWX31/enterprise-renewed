@@ -24,7 +24,7 @@ module.exports = {
 			.getOne()
 
 		if (getEntry) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: `${role} is already in shop`,
 				ephemeral: true
 			})
@@ -35,7 +35,7 @@ module.exports = {
 		item.role = role.id.toString()
 		AppDataSource.manager.save(item)
 
-		interaction.reply({
+		await interaction.reply({
 			content: `Added ${role} to shop for ${price}`,
 			ephemeral: true
 		})

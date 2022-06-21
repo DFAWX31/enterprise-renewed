@@ -19,7 +19,7 @@ module.exports = {
 			.getOne()
 
 		if (!getEntry) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: "please use join before claiming this",
 				ephemeral: true
 			})
@@ -28,7 +28,7 @@ module.exports = {
 		const date = ((Date.now() - (Date.now() % 1000)) / 1000).toString()
 
 		if (parseInt(getEntry.yearly) + 31557600 >= parseInt(date)) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: "You can't do that yet as it's not been a year yet",
 				ephemeral: true
 			})
@@ -70,6 +70,6 @@ module.exports = {
 			console.error(error);
 		}
 
-		interaction.reply("You have earned 5000 coins")
+		await interaction.reply("You have earned 5000 coins")
 	}
 }

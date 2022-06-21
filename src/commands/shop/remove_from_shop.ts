@@ -21,7 +21,7 @@ module.exports = {
 			.getOne()
 
 		if (!getEntry) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: `${role} not found in the shop`,
 				ephemeral: true
 			})
@@ -38,7 +38,7 @@ module.exports = {
 			console.error(error)
 		}
 
-		interaction.reply({
+		await interaction.reply({
 			content: `${role} has been removed from the shop`,
 			ephemeral: true
 		})

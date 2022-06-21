@@ -13,11 +13,11 @@ module.exports = {
 		const getEntry = await AppDataSource
 			.getRepository(Players)
 			.createQueryBuilder("players")
-			.where("players.id = :id", { id: interaction.user.id})
+			.where("players.id = :id", { id: interaction.user.id })
 			.getOne()
 
 		if (!getEntry) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: "Please join the game using join before doing this",
 				ephemeral: true
 			})
@@ -25,6 +25,6 @@ module.exports = {
 
 		const balance = getEntry.balance
 
-		interaction.reply(`Your current balance is ${balance}`)
+		await interaction.reply(`Your current balance is ${balance}`)
 	}
 }

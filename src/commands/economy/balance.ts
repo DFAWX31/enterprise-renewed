@@ -1,40 +1,30 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import { AppDataSource } from "../../database/appdata";
-import { Freebies } from "../../database/entities/freebies";
 import { Players } from "../../database/entities/players";
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('join')
-		.setDescription('Join the economy game'),
+		.setName('balance')
+		.setDescription('View your current balance'),
 	async execute(interaction: CommandInteraction) {
 		if (interaction.user.bot) return
-		
-		
+
 		const getEntry = await AppDataSource
 			.getRepository(Players)
 			.createQueryBuilder("players")
 			.where("players.id = :id", { id: interaction.user.id})
 			.getOne()
-	
+
 		if (!getEntry) {
-			const user = new Players()
-			user.id = interaction.user.id.toString()
-			user.balance = 0
-			AppDataSource.manager.save(user)
-			interaction.reply({
-				content: `${interaction.user} joined the game with 0 balance`,
-				ephemeral: true
-			})
-			const freebie = new Freebies()
-			freebie.user = user
-			AppDataSource.manager.save(freebie)
-		} else {
-			interaction.reply({
-				content: "You have already joined the game",
+			return interaction.reply({
+				content: "Please join the game using join before doing this",
 				ephemeral: true
 			})
 		}
+
+		const balance = getEntry.balance
+
+		interaction.reply(`Your current balance is ${balance}`)
 	}
 }

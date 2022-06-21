@@ -2,7 +2,8 @@ import 'dotenv/config'
 import { DataSource } from 'typeorm'
 import path from 'path'
 import fs from 'fs'
-import { players } from './entities/users'
+import { Players } from './entities/players'
+import { Freebies } from './entities/freebies'
 
 const entities: string[] = []
 
@@ -14,8 +15,6 @@ fs.readdirSync(entityDirectory).forEach(file => {
 		entities.push(filePath)
 	}
 })
-console.log(entities);
-
 
 export const AppDataSource = new DataSource({
 	type: "postgres",
@@ -25,6 +24,6 @@ export const AppDataSource = new DataSource({
 	password: process.env.password,
 	database: process.env.database,
 	synchronize: true,
-	logging: true,
+	logging: false,
 	entities: entities
 })

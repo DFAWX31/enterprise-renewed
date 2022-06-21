@@ -12,9 +12,9 @@ const commands :any[] = []
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = getFiles(commandsPath, '.ts')
 
-commandFiles.forEach(file => {
-	if (file.endsWith('db.ts')) return
+// console.log(commandFiles);
 
+commandFiles.forEach(file => {
 	const command = require(file)
 
 	commands.push(command.data.toJSON())

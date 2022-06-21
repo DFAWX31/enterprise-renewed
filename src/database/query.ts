@@ -1,11 +1,15 @@
 import { AppDataSource } from './appdata'
-import { players } from './entities/users'
+import { Freebies } from './entities/freebies'
+import { Players } from './entities/players'
 
-const type = new players()
-type.id = "123"
-type.balance = 0
-const wow = async () => {
-	await AppDataSource.manager.save(type)
-}
-wow()
-console.log(`user has been saved with id = ${type.id}`)
+AppDataSource.initialize()
+	.then(async () => {
+		const user = new Players()
+		user.id = "1243"
+		user.balance = 0
+		AppDataSource.manager.save(user)
+		const freebie = new Freebies()
+		freebie.user = user
+		AppDataSource.manager.save(freebie)
+	})
+	.catch((error) => console.error(error))

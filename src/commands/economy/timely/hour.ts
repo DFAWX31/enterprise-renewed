@@ -44,14 +44,18 @@ module.exports = {
 
 		const money = getUser?.balance + 10
 
-		await AppDataSource
-			.createQueryBuilder()
-			.update(Players)
-			.set({
-				balance: money
-			})
-			.where("id = :id", {id: interaction.user.id})
-			.execute()
+		try{
+			await AppDataSource
+				.createQueryBuilder()
+				.update(Players)
+				.set({
+					balance: money
+				})
+				.where("id = :id", {id: interaction.user.id})
+				.execute()
+		} catch(error) {
+			console.error(error)
+		}
 
 		try {
 			await AppDataSource

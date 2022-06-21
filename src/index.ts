@@ -8,7 +8,7 @@ class MyClient extends Client {
 	commands = {} as {
 		[key: string]: any
 	}
-	
+
 	constructor(options: ClientOptions) {
 		super(options)
 	}
@@ -16,11 +16,12 @@ class MyClient extends Client {
 
 const token = process.env.token!;
 
-const client:MyClient = new MyClient({
-	intents:[
+const client: MyClient = new MyClient({
+	intents: [
 		Intents.FLAGS.GUILDS,
 		Intents.FLAGS.GUILD_MEMBERS,
-		Intents.FLAGS.GUILD_MESSAGES
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MEMBERS
 	]
 });
 

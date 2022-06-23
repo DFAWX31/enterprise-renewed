@@ -1,4 +1,3 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import { Client, ClientOptions, Collection, Intents } from 'discord.js';
 import 'dotenv/config'
@@ -21,7 +20,9 @@ const client: MyClient = new MyClient({
 		Intents.FLAGS.GUILDS,
 		Intents.FLAGS.GUILD_MEMBERS,
 		Intents.FLAGS.GUILD_MESSAGES,
-		Intents.FLAGS.GUILD_MEMBERS
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.DIRECT_MESSAGES,
+		Intents.FLAGS.DIRECT_MESSAGE_REACTIONS
 	]
 });
 

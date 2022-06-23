@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Rules } from "./rules";
 
 @Entity()
 export class Rule {
@@ -13,4 +14,7 @@ export class Rule {
 
 	@Column()
 	guild: string
+
+	@OneToMany(() => Rules, (rules: Rules) => rules.rule)
+	rules: Rules[]
 }

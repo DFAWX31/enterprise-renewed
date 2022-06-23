@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Rule } from "./rule";
 
 @Entity()
@@ -9,7 +9,6 @@ export class Rules {
 	@Column()
 	rule_string: string
 
-	@OneToOne(() => Rule)
-	@JoinColumn()
+	@ManyToOne(() => Rule, (rule: Rule) => rule.rules)
 	rule: Rule
 }

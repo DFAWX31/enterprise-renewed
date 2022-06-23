@@ -1,13 +1,13 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandInteraction, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { AppDataSource } from "../../database/appdata";
 import { Rule } from "../../database/entities/rule";
 import { Rules } from "../../database/entities/rules";
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName("Send")
-		.setDescription("Send the roels embed")
+		.setName("send")
+		.setDescription("Send the roles embed")
 		.addChannelOption(option => option.setName("channel").setDescription("The channel to send the rules to").setRequired(true))
 		.setDefaultMemberPermissions(32),
 	async execute(interaction: CommandInteraction) {
@@ -21,6 +21,8 @@ module.exports = {
 			.where("rule.guild = :guild", { guild: interaction.guild?.id })
 			.getOne()
 
+
+
 		if (!getRule) {
 			return await interaction.reply({
 				content: "no roles found for this server",
@@ -31,8 +33,10 @@ module.exports = {
 		const getRules = await AppDataSource
 			.getRepository(Rules)
 			.createQueryBuilder("rules")
-			.where("rules.id = :id", { id: getRule.id })
+			.where("rules.ruleId = :id", { id: getRule.id })
 			.getMany()
+
+
 
 		if (!getRules) {
 			return await interaction.reply({
@@ -50,10 +54,27 @@ module.exports = {
 			embed.addField(`Rule number ${i + 1}`, getRules[i].rule_string, false)
 		}
 
-		if (getRule.message) {
-			const channel = interaction.guild?.channels.cache.find(chanel => chanel.id == getRule.channel)!
-			
-			const message = channel.
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageButton()
+					.setCustomId("OK")
+					.setEmoji("🆗")
+					.setLabel("OK")
+					.setStyle("SUCCESS")
+			)
+
+		const send_channel = interaction.client.channels.cache.get(channel.id)
+
+		if (!send_channel?.isText()) {
+			return await interaction.reply({
+				content: `${channel} not found`,
+				ephemeral: true
+			})
 		}
+
+		await send_channel.send({
+			embeds: [embed],
+			components: [row]
+		})
 	}
 }

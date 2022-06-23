@@ -1,6 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import moment from "moment";
 import { AppDataSource } from "../../../database/appdata";
 import { Freebies } from "../../../database/entities/freebies";
 

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, Role } from "discord.js";
+import { CommandInteraction } from "discord.js";
 import { AppDataSource } from "../../database/appdata";
 import { Shop } from "../../database/entities/shop";
 

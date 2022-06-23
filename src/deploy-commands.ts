@@ -8,7 +8,7 @@ const token = process.env.token!;
 const clientId = process.env.clientId!;
 const guildId = process.env.guildId!;
 
-const commands :any[] = []
+const commands: any[] = []
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = getFiles(commandsPath, '.ts')
 

@@ -9,6 +9,8 @@ module.exports = {
 
 		if (interaction.user.bot) return
 
+		if (interaction.customId != "OK") return
+
 		const role = interaction.guild?.roles.cache.get(process.env.verified_role!)
 
 		try {

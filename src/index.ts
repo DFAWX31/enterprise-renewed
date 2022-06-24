@@ -2,6 +2,7 @@ import path from 'node:path';
 import { Client, ClientOptions, Collection, Intents } from 'discord.js';
 import 'dotenv/config'
 import getFiles from './get_files';
+import { AppDataSource } from './database/appdata';
 
 class MyClient extends Client {
 	commands = {} as {

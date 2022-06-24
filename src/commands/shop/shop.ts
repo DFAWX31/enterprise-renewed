@@ -110,6 +110,11 @@ module.exports = {
 
 					const member = i.guild?.members.cache.find(mem => mem.id === i.user.id)
 
+					if (member?.roles.cache.some(role => role.id === roleOrgins[num].id)) {
+						await i.user.send("You already have the role!")
+						return
+					}
+
 					member?.roles.add(roleOrgins[num])
 
 					await i.channel?.send({

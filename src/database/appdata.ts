@@ -26,7 +26,7 @@ while (retries) {
 			password: process.env.password,
 			database: process.env.database,
 			synchronize: true,
-			logging: true,
+			logging: false,
 			entities: entities
 		})
 		break

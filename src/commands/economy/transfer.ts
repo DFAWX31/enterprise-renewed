@@ -17,7 +17,7 @@ module.exports = {
 
 		const getGiver = await AppDataSource
 			.getRepository(Players)
-			.createQueryBuilder('players')
+			.createQueryBuilder('player')
 			.where('player.id = :id', { id: interaction.user.id })
 			.getOne()
 

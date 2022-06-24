@@ -60,7 +60,6 @@ module.exports = {
 			date_strings.push(days + ":" + hours + ":" + minutes + ":" + seconds)
 		})
 
-		console.log(date_strings)
 
 		const name_array = ["hourly", "daily", "weekly", "monthly", "yearly"]
 
